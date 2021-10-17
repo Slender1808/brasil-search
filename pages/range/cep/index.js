@@ -1,39 +1,26 @@
 import Header from "../../../components/Header";
 import Link from "next/link";
 
-export async function getServerSideProps(context) {
-  let data = [...Array(10001)];
+export default function Range() {
+  const indices = [...Array(10000)];
 
-  let index = parseInt(
-    (("0000" + parseInt(context.query.range)).slice(-4) + "00000000").slice(
-      0,
-      8
-    )
-  );
-
-  data = data.map(() => {
-    index++;
-    return ("00000000" + (index - 1)).slice(-8);
-  });
-
-  return {
-    props: { data }, // will be passed to the page component as props
-  };
-}
-
-export default function Indice(props) {
   return (
     <div>
       <Header />
-
       <main className="container pt-5 mt-5">
         <section className="row">
           <ol className="list-group list-group-numbered">
-            {props.data.map((e, i) => {
+            {indices.map((e, i) => {
               return (
                 <li key={i} className="list-group-item">
-                  <Link href={"/cep/" + e}>
-                    <a>cep:{e}</a>
+                  <Link
+                    href={`/range/cep/${i}`}
+                  >
+                    <a>
+                      cep:
+                      {(("0000" + (i + 1)).slice(-4) + "00000000").slice(0, 8)}-
+                      {(("0000" + i).slice(-4) + "00000000").slice(0, 8)}
+                    </a>
                   </Link>
                 </li>
               );
