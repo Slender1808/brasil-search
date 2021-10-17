@@ -2,7 +2,8 @@ import Header from "../../../components/Header";
 import Link from "next/link";
 
 export default function Range() {
-  const indices = [...Array(10000)];
+  //const indices = [...Array(10000)];
+  const indices = [...Array(500)];
 
   return (
     <div>

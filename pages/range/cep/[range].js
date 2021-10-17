@@ -17,7 +17,8 @@ export async function getStaticPaths(){
 }
 
 export async function getStaticProps(context) {
-  let data = [...Array(10001)];
+  //let data = [...Array(10001)];
+  let data = [...Array(500)];
 
   let index = parseInt(
     (("0000" + parseInt(context.params.range)).slice(-4) + "00000000").slice(
