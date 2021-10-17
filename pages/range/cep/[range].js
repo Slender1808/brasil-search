@@ -2,7 +2,8 @@ import Header from "../../../components/Header";
 import Link from "next/link";
 
 export async function getStaticPaths(){
-  const ranges = [...Array(10000)];
+  //const ranges = [...Array(10000)];
+  const ranges = [...Array(500)];
 
   return {
     paths: ranges.map((e,i)=> {
