@@ -33,7 +33,7 @@ export default function Header() {
             </Navbar.Brand>
             <Navbar.Collapse id="responsive-navbar-nav">
               <Nav className="d-flex justify-content-evenly w-100">
-                <Nav.Link className="text-light" href="/cep/indice">CEP</Nav.Link>
+                <Nav.Link className="text-light" href="/range/cep">CEP</Nav.Link>
               </Nav>
             </Navbar.Collapse>
           </Container>

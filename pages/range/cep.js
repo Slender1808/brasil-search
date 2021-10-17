@@ -1,8 +1,8 @@
 import Header from "../../components/Header";
 import Link from "next/link";
 
-export default function Indice() {
-  const indices = [...Array(999)];
+export default function Range() {
+  const indices = [...Array(10000)];
 
   return (
     <div>
@@ -13,10 +13,13 @@ export default function Indice() {
             {indices.map((e, i) => {
               return (
                 <li key={i} className="list-group-item">
-                  <Link href={`/ceps/${i}.html`}>
+                  <Link
+                    href={`/index/cep/${i}`}
+                  >
                     <a>
-                      cep:{(i + 1 + "00000000").slice(0, 8)}-
-                      {(i + "00000000").slice(0, 8)}
+                      cep:
+                      {(("0000" + (i + 1)).slice(-4) + "00000000").slice(0, 8)}-
+                      {(("0000" + i).slice(-4) + "00000000").slice(0, 8)}
                     </a>
                   </Link>
                 </li>
