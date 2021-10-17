@@ -1,11 +1,26 @@
 import Header from "../../../components/Header";
 import Link from "next/link";
 
-export async function getServerSideProps(context) {
+export async function getStaticPaths(){
+  const ranges = [...Array(10000)];
+
+  return {
+    paths: ranges.map((e,i)=> {
+      return {
+        params:{
+          range: String(i)
+        }
+      }
+    }),
+    fallback:false
+  }
+}
+
+export async function getStaticProps(context) {
   let data = [...Array(10001)];
 
   let index = parseInt(
-    (("0000" + parseInt(context.query.indice)).slice(-4) + "00000000").slice(
+    (("0000" + parseInt(context.params.range)).slice(-4) + "00000000").slice(
       0,
       8
     )
