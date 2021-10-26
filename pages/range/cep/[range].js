@@ -3,7 +3,7 @@ import Link from "next/link";
 
 export async function getStaticPaths(){
   //const ranges = [...Array(10000)];
-  const ranges = [...Array(100)];
+  const ranges = [...Array(200)];
 
   return {
     paths: ranges.map((e,i)=> {
@@ -19,7 +19,7 @@ export async function getStaticPaths(){
 
 export async function getStaticProps(context) {
   //let data = [...Array(10001)];
-  let data = [...Array(100)];
+  let data = [...Array(50)];
 
   let index = parseInt(
     (("0000" + parseInt(context.params.range)).slice(-4) + "00000000").slice(
