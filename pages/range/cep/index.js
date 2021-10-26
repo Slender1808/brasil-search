@@ -3,7 +3,7 @@ import Link from "next/link";
 
 export default function Range() {
   //const indices = [...Array(10000)];
-  const indices = [...Array(999)];
+  const indices = [...Array(100)];
 
   return (
     <div>
