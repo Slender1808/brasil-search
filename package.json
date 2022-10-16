@@ -1,22 +1,24 @@
 {
   "name": "brasil-search",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "private": false,
   "scripts": {
     "dev": "next dev -p 8080",
     "build": "next build",
     "start": "next start -p 8080",
-    "lint": "next lint"
+    "lint": "next lint",
+    "postbuild": "next-sitemap"
   },
   "dependencies": {
-    "bootstrap": "^5.0.0-beta3",
-    "next": "12.1.0",
-    "react": "17.0.2",
-    "react-bootstrap": "^1.6.4",
-    "react-dom": "17.0.2"
+    "bootstrap": "^5.2.2",
+    "next": "latest",
+    "react": "latest",
+    "react-bootstrap": "^2.5.0",
+    "react-dom": "latest"
   },
   "devDependencies": {
     "eslint": "7.32.0",
-    "eslint-config-next": "11.1.0"
+    "eslint-config-next": "latest",
+    "next-sitemap": "3.1.25"
   }
 }

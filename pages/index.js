@@ -1,21 +1,22 @@
-import Link from 'next/link'
-import Script from 'next/script'
-import Header from "../components/Header"
+import Script from "next/script";
+import Header from "../components/Header";
+import Footer from "../components/Footer";
+
 
 export default function Home() {
+  console.log("Home")  
+
   return (
     <div>
-      <Header/>
+      <Header />
       <main className="pt-5 mt-5">
-        <Script async src="https://cse.google.com/cse.js?cx=33882ab2bdf9a4f8a"/>
+        <Script
+          async
+          src="https://cse.google.com/cse.js?cx=33882ab2bdf9a4f8a"
+        />
         <div className="gcse-search"></div>
       </main>
-
-      <footer>
-        <Link href="https://github.com/Slender1808/brasil-search">
-          https://github.com/Slender1808/brasil-search
-        </Link>
-      </footer>
+      <Footer />
     </div>
-  )
+  );
 }

@@ -1,16 +1,18 @@
 import Head from "next/head";
 import Image from "next/image";
-import {Navbar, Container, Nav} from "react-bootstrap";
+import Link from "next/link";
+import { Navbar, Container, Nav } from "react-bootstrap";
 
 export default function Header() {
+
   return (
     <>
       <Head>
         <title>Brasil Search</title>
-        <meta name="description" content="Brasil Search"/>
+        <meta name="description" content="Brasil Search" />
 
-        <meta property="og:title" content="Brasil Search"/>
-        <meta property="og:description" content="Brasil Search"/>
+        <meta property="og:title" content="Brasil Search" />
+        <meta property="og:description" content="Brasil Search" />
       </Head>
       <header>
         <Navbar
@@ -22,18 +24,17 @@ export default function Header() {
           className="bg-primary shadow-lg"
         >
           <Container>
-            <Navbar.Toggle aria-controls="responsive-navbar-nav"/>
+            <Navbar.Toggle aria-controls="responsive-navbar-nav" />
             <Navbar.Brand href="/" className="d-flex align-items-center">
-              <Image
-                alt="Logo"
-                height="24"
-                width="24"
-                src="/favicon.ico"
-              />
+              <Image alt="Logo" height="24" width="24" src="/favicon.ico" />
             </Navbar.Brand>
             <Navbar.Collapse id="responsive-navbar-nav">
-              <Nav className="d-flex justify-content-evenly w-100">
-                <Nav.Link className="text-light" href="/range/cep">CEP</Nav.Link>
+              <Nav className="d-flex justify-content-evenly align-items-center w-100">
+                <Link href="/cep/50000000">
+                  <a className="text-light nav-link" >
+                    CEP
+                  </a>
+                </Link>
               </Nav>
             </Navbar.Collapse>
           </Container>
