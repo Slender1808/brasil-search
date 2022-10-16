@@ -2,9 +2,9 @@ import Header from "../../components/Header";
 import Footer from "../../components/Footer";
 import Link from "next/link";
 
-
-//0000000
-//9999999
+//           99999999;
+//           50000000
+//           98950970;
 
 export default function Cep(props) {
   console.log("props", props);
@@ -25,6 +25,12 @@ export default function Cep(props) {
               <div className="ms-2 me-auto">
                 <div className="fw-bold">Estado</div>
                 {props.cep.state}
+              </div>
+            </li>
+            <li className="list-group-item">
+              <div className="ms-2 me-auto">
+                <div className="fw-bold">Cidade</div>
+                {props.cep.city}
               </div>
             </li>
             <li className="list-group-item">
@@ -56,29 +62,18 @@ export default function Cep(props) {
           <nav aria-label="Page navigation example">
             <ul className="pagination justify-content-center">
               <li className="page-item">
-                <Link href={`/cep/${props.node - 1}`}>
+                <Link href={`/cep/${props.node > 0 ? props.node - 1 : 0}`}>
                   <a className="page-link" aria-label="Previous">
                     <span aria-hidden="true">&laquo;</span>
                   </a>
                 </Link>
               </li>
               <li className="page-item">
-                <Link href={`/cep/${props.left}`}>
-                  <a className="page-link">{props.left}</a>
-                </Link>
-              </li>
-              <li className="page-item">
-                <Link href={`/cep/${props.parent}`}>
-                  <a className="page-link">{props.parent}</a>
-                </Link>
-              </li>
-              <li className="page-item">
-                <Link href={`/cep/${props.right}`}>
-                  <a className="page-link">{props.right}</a>
-                </Link>
-              </li>
-              <li className="page-item">
-                <Link href={`/cep/${props.node + 1}`}>
+                <Link
+                  href={`/cep/${
+                    props.node < 99999999 ? props.node + 1 : 99999999
+                  }`}
+                >
                   <a className="page-link" aria-label="Next">
                     <span aria-hidden="true">&raquo;</span>
                   </a>
@@ -88,15 +83,13 @@ export default function Cep(props) {
           </nav>
         </footer>
       </main>
-
       <Footer />
     </div>
   );
 }
 
-// Generates `/posts/1` and `/posts/2`
 export async function getStaticPaths() {
-  const size = 2000000;
+  const size = 99999999;
 
   let paths = [];
   for (let index = 98950969; index <= 98950974; index++) {
@@ -107,36 +100,20 @@ export async function getStaticPaths() {
     });
   }
 
-  console.log("paths", paths);
-
   return {
     paths: paths,
-    fallback: false,
+    fallback: "blocking",
   };
 }
 
 // `getStaticPaths` requires using `getStaticProps`
 export async function getStaticProps(context) {
-  const index = parseInt(context.params.cep);
-  let props;
-
-  //const res = await fetch('https://.../cep/')
-  //const data = await res.json()
-
-  if (index > 5000000) {
-    props = 0//avl1[index];
-  } else {
-    props = 0//avl0[index];
-  }
-
-  console.log("props", props);
-
   console.log("getStaticProps", context.params.cep);
   let cep = await fetch(
     `https://brasilapi.com.br/api/cep/v2/${context.params.cep}`
   ).then((response) => response.json());
 
   return {
-    props: { cep, ...props }, // will be passed to the page component as props
+    props: { cep, node: parseInt(context.params.cep) }, // will be passed to the page component as props
   };
 }

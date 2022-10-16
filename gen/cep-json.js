@@ -4,6 +4,7 @@ const fs = require("fs");
 
 //           99999999;
 //           50000000
+//           98950970;
 const size = 99999999;
 
 const tree = new AVLTree();
