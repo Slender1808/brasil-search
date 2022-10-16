@@ -4,38 +4,98 @@ import AVLTree from "avl";
 
 //0000000
 //9999999
-const size = 5;
 
-export async function getServerSideProps(context) {
-  const res = await fetch(
-    `https://brasilapi.com.br/api/cep/v2/${context.query.cep}`
-  );
-  const data = await res.json();
+export default function Cep(props) {
+  console.log("props", props);
 
-  if (!data) {
-    return {
-      notFound: true,
-    };
-  }
-
-  return {
-    props: { data }, // will be passed to the page component as props
-  };
-}
-
-export default function Indice(props) {
   return (
     <div>
       <Header />
-
       <main className="container pt-5 mt-5">
-        <section className="row">{JSON.stringify(props)}</section>
+        {props.cep.errors == null ? (
+          <ul className="list-group list-group-flush">
+            <li className="list-group-item">
+              <div className="ms-2 me-auto">
+                <div className="fw-bold">Cep</div>
+                {props.cep.cep}
+              </div>
+            </li>
+            <li className="list-group-item">
+              <div className="ms-2 me-auto">
+                <div className="fw-bold">Estado</div>
+                {props.cep.state}
+              </div>
+            </li>
+            <li className="list-group-item">
+              <div className="ms-2 me-auto">
+                <div className="fw-bold">Bairro</div>
+                {props.cep.neighborhood}
+              </div>
+            </li>
+            <li className="list-group-item">
+              <div className="ms-2 me-auto">
+                <div className="fw-bold">Rua</div>
+                {props.cep.street}
+              </div>
+            </li>
+            {props.cep.location.coordinates.longitude ? (
+              <li className="list-group-item">
+                <div className="ms-2 me-auto">
+                  <div className="fw-bold">coordinates</div>
+                  {props.cep.location.coordinates.longitude}{" "}
+                  {props.cep.location.coordinates.latitude}
+                </div>
+              </li>
+            ) : null}
+          </ul>
+        ) : (
+          <h1 className="text-center">{props.cep.message}</h1>
+        )}
+        <footer className="my-5">
+          <nav aria-label="Page navigation example">
+            <ul className="pagination justify-content-center">
+              <li className="page-item">
+                <Link href={`/cep/${props.node - 1}`}>
+                  <a className="page-link" aria-label="Previous">
+                    <span aria-hidden="true">&laquo;</span>
+                  </a>
+                </Link>
+              </li>
+              <li className="page-item">
+                <Link href={`/cep/${props.left}`}>
+                  <a className="page-link">{props.left}</a>
+                </Link>
+              </li>
+              <li className="page-item">
+                <Link href={`/cep/${props.parent}`}>
+                  <a className="page-link">{props.parent}</a>
+                </Link>
+              </li>
+              <li className="page-item">
+                <Link href={`/cep/${props.right}`}>
+                  <a className="page-link">{props.right}</a>
+                </Link>
+              </li>
+              <li className="page-item">
+                <Link href={`/cep/${props.node + 1}`}>
+                  <a className="page-link" aria-label="Next">
+                    <span aria-hidden="true">&raquo;</span>
+                  </a>
+                </Link>
+              </li>
+            </ul>
+          </nav>
+        </footer>
       </main>
 
-      <footer>
-        <Link href="https://github.com/Slender1808/brasil-search">
-          https://github.com/Slender1808/brasil-search
-        </Link>
+      <footer className="py-3 my-4">
+        <ul className="nav justify-content-center border-bottom pb-3 mb-3">
+          <li className="nav-item">
+            <Link href="https://github.com/Slender1808/brasil-search">
+              <a className="nav-link px-2 text-muted">Sorce code</a>
+            </Link>
+          </li>
+        </ul>
       </footer>
     </div>
   );
@@ -43,61 +103,55 @@ export default function Indice(props) {
 
 // Generates `/posts/1` and `/posts/2`
 export async function getStaticPaths() {
-  const tree = new AVLTree();
+  const size = 9999999;
 
-  let data = [...Array(size + 1)];
-
+  let paths = [];
   for (let index = 0; index <= size; index++) {
-    tree.insert(index);
-  }
-
-  let tmp;
-  for (let index = 0; index <= size; index++) {
-    tmp = tree.at(index);
-
-    data[index] = {
+    paths.push({
       params: {
-        cep: String(tmp.key).padStart(8, "0"),
-        key: tmp.key,
-        parent: tmp.parent.key,
-        left: tmp.left.key,
-        right: tmp.right.key,
+        cep: String(index).padStart(8, "0"),
       },
-    };
+    });
   }
+
+  //console.log("paths", paths);
 
   return {
-    paths: data,
+    paths: paths,
     fallback: false,
   };
 }
 
 // `getStaticPaths` requires using `getStaticProps`
 export async function getStaticProps(context) {
-  context.params;
+  const size = 9999999;
 
-  let [key, parent, left, right] = await Promise.all([
-    fetch(`https://brasilapi.com.br/api/cep/v2/${context.params.cep}`).then(
-      (response) => response.json()
-    ),
-    fetch(
-      `https://brasilapi.com.br/api/cep/v2/${String(
-        context.params.parent
-      ).padStart(8, "0")}`
-    ).then((response) => response.json()),
-    fetch(
-      `https://brasilapi.com.br/api/cep/v2/${String(
-        context.params.left
-      ).padStart(8, "0")}`
-    ).then((response) => response.json()),
-    fetch(
-      `https://brasilapi.com.br/api/cep/v2/${String(
-        context.params.right
-      ).padStart(8, "0")}`
-    ).then((response) => response.json()),
-  ]);
+  const tree = new AVLTree();
+
+  for (let index = 0; index <= size; index++) {
+    tree.insert(index);
+  }
+
+  const root = tree.at(Math.round(size / 2)).key;
+
+  const node = tree.find(parseInt(context.params.cep));
+  //console.log("node", node);
+
+  const props = {
+    node: parseInt(context.params.cep),
+    parent: node.parent ? node.parent.key : root,
+    left: node.left ? node.left.key : root,
+    right: node.right ? node.right.key : root,
+  };
+
+  tree.destroy();
+
+  console.log("getStaticProps", context.params.cep);
+  let cep = await fetch(
+    `https://brasilapi.com.br/api/cep/v2/${context.params.cep}`
+  ).then((response) => response.json());
 
   return {
-    props: { key, parent, left, right }, // will be passed to the page component as props
+    props: { cep, ...props }, // will be passed to the page component as props
   };
 }
