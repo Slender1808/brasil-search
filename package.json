@@ -6,7 +6,8 @@
     "dev": "next dev -p 8080",
     "build": "next build",
     "start": "next start -p 8080",
-    "lint": "next lint"
+    "lint": "next lint",
+    "postbuild": "next-sitemap"
   },
   "dependencies": {
     "avl": "^1.5.3",
@@ -14,11 +15,11 @@
     "next": "latest",
     "react": "latest",
     "react-bootstrap": "^2.5.0",
-    "react-dom": "latest",
-    "globby": "^13.1.2"
+    "react-dom": "latest"
   },
   "devDependencies": {
     "eslint": "7.32.0",
-    "eslint-config-next": "latest"
+    "eslint-config-next": "latest",
+    "next-sitemap": "3.1.25"
   }
 }

@@ -4,3 +4,6 @@ Allow: /
 
 # Host
 Host: https://brasil-search.vercel.app/
+
+# Sitemaps
+Sitemap: https://brasil-search.vercel.app/sitemap.xml
