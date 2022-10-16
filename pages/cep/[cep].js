@@ -7,8 +7,6 @@ import Link from "next/link";
 //           98950970;
 
 export default function Cep(props) {
-  console.log("props", props);
-
   return (
     <div>
       <Header />
@@ -92,7 +90,7 @@ export async function getStaticPaths() {
   const size = 99999999;
 
   let paths = [];
-  for (let index = 98950969; index <= 98950974; index++) {
+  for (let index = size - 100; index <= size; index++) {
     paths.push({
       params: {
         cep: String(index).padStart(8, "0"),
