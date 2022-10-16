@@ -1,7 +1,7 @@
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
 import Link from "next/link";
-import AVLTree from "avl";
+
 
 //0000000
 //9999999
@@ -89,17 +89,17 @@ export default function Cep(props) {
         </footer>
       </main>
 
-      <Footer/>
+      <Footer />
     </div>
   );
 }
 
 // Generates `/posts/1` and `/posts/2`
 export async function getStaticPaths() {
-  const size = 9999999;
+  const size = 2000000;
 
   let paths = [];
-  for (let index = 0; index <= size; index++) {
+  for (let index = 98950969; index <= 98950974; index++) {
     paths.push({
       params: {
         cep: String(index).padStart(8, "0"),
@@ -107,7 +107,7 @@ export async function getStaticPaths() {
     });
   }
 
-  //console.log("paths", paths);
+  console.log("paths", paths);
 
   return {
     paths: paths,
@@ -117,27 +117,19 @@ export async function getStaticPaths() {
 
 // `getStaticPaths` requires using `getStaticProps`
 export async function getStaticProps(context) {
-  const size = 9999999;
+  const index = parseInt(context.params.cep);
+  let props;
 
-  const tree = new AVLTree();
+  //const res = await fetch('https://.../cep/')
+  //const data = await res.json()
 
-  for (let index = 0; index <= size; index++) {
-    tree.insert(index);
+  if (index > 5000000) {
+    props = 0//avl1[index];
+  } else {
+    props = 0//avl0[index];
   }
 
-  const root = tree.at(Math.round(size / 2)).key;
-
-  const node = tree.find(parseInt(context.params.cep));
-  //console.log("node", node);
-
-  const props = {
-    node: parseInt(context.params.cep),
-    parent: node.parent ? node.parent.key : root,
-    left: node.left ? node.left.key : root,
-    right: node.right ? node.right.key : root,
-  };
-
-  tree.destroy();
+  console.log("props", props);
 
   console.log("getStaticProps", context.params.cep);
   let cep = await fetch(
