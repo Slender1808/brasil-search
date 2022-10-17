@@ -10,7 +10,7 @@ export default function Cep(props) {
   return (
     <div>
       <Header />
-      <main className="container pt-5 mt-5">
+      <main className="container py-5 my-5">
         {props.cep.errors == null ? (
           <ul className="list-group list-group-flush">
             <li className="list-group-item">
@@ -54,19 +54,22 @@ export default function Cep(props) {
             ) : null}
           </ul>
         ) : (
-          <h1 className="text-center">{props.cep.message}</h1>
+          <div className="text-center">
+            <h1 >Esse cep não existe</h1>
+            <p>{props.cep.message}</p>
+          </div>
         )}
-        <footer className="my-5">
+        <footer className="my-5 py-5">
           <nav aria-label="Page navigation example">
             <ul className="pagination justify-content-center">
-              <li className="page-item">
+              <li className="page-item shadow">
                 <Link href={`/cep/${props.node > 0 ? props.node - 1 : 0}`}>
                   <a className="page-link" aria-label="Previous">
                     <span aria-hidden="true">&laquo;</span>
                   </a>
                 </Link>
               </li>
-              <li className="page-item">
+              <li className="page-item shadow">
                 <Link
                   href={`/cep/${
                     props.node < 99999999 ? props.node + 1 : 99999999
@@ -90,7 +93,7 @@ export async function getStaticPaths() {
   const size = 99999999;
 
   let paths = [];
-  for (let index = size - 100; index <= size; index++) {
+  for (let index = size - 1000; index <= size; index++) {
     paths.push({
       params: {
         cep: String(index).padStart(8, "0"),
