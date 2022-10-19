@@ -92,7 +92,11 @@ export default function Cep(props) {
 export async function getStaticPaths() {
   const size = 99999999;
 
-  let paths = [];
+  let paths = [{
+    params:{
+      cep: String(50000000).padStart(8,"0"),
+    }
+  }];
   for (let index = size - 1000; index <= size; index++) {
     paths.push({
       params: {
