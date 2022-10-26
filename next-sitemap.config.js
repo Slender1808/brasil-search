@@ -2,4 +2,5 @@
 module.exports = {
   siteUrl: "https://brasil-search.vercel.app/",
   generateRobotsTxt: true,
+  changefreq: 'yearly',
 };
