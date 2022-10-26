@@ -12,7 +12,7 @@ export default function Home() {
       <main className="pt-5 mt-5">
         <Script
           async
-          src="https://cse.google.com/cse.js?cx=33882ab2bdf9a4f8a"
+          src="https://cse.google.com/cse.js?cx=e7e2e0b1ebd0945c6"
         />
         <div className="gcse-search"></div>
       </main>
