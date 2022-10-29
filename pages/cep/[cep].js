@@ -63,7 +63,7 @@ export default function Cep(props) {
           <nav aria-label="Page navigation example">
             <ul className="pagination justify-content-center">
               <li className="page-item shadow">
-                <Link href={`/cep/${props.node > 0 ? props.node - 1 : 0}`}>
+                <Link href={`/cep/${props.node > 0 ? String(props.node - 1).padStart(8,"0") : String(0).padStart(8,"0")}`}>
                   <a className="page-link" aria-label="Previous">
                     <span aria-hidden="true">&laquo;</span>
                   </a>
@@ -72,7 +72,7 @@ export default function Cep(props) {
               <li className="page-item shadow">
                 <Link
                   href={`/cep/${
-                    props.node < 99999999 ? props.node + 1 : 99999999
+                    props.node < 99999999 ? String(props.node + 1).padStart(8,"0") : 99999999
                   }`}
                 >
                   <a className="page-link" aria-label="Next">
@@ -97,7 +97,7 @@ export async function getStaticPaths() {
       cep: String(50000000).padStart(8,"0"),
     }
   }];
-  for (let index = size - 1000; index <= size; index++) {
+  for (let index = size - 100; index <= size; index++) {
     paths.push({
       params: {
         cep: String(index).padStart(8, "0"),
