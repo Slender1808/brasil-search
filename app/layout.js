@@ -1,9 +1,10 @@
 import Script from "next/script";
 //import "bootstrap/dist/css/bootstrap.min.css";
-import Header from "../components/Header";
 import Footer from "../components/Footer";
 
-export default function Layout({ children }) {
+import Analytics from "../components/Analytics";
+
+export default function RootLayout({ children }) {
   return (
     <html lang="pt">
       <head>
@@ -16,7 +17,6 @@ export default function Layout({ children }) {
           integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi"
           crossOrigin="anonymous"
         />
-
         <meta
           name="google-site-verification"
           content="K6n_i0D944OJIJwD-M5iQ-jy3oAKFS5aTTL3uJOpy9I"
@@ -26,9 +26,10 @@ export default function Layout({ children }) {
           strategy="lazyOnload"
           src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3304167426675646"
         ></Script>
+        <Analytics />
       </head>
       <body>
-        <Header />
+        
         {children}
         <Footer />
       </body>

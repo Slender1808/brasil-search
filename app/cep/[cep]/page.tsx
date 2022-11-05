@@ -1,10 +1,11 @@
 import Link from "next/link";
+import Header from "../../../components/Header";
 
 //           99999999;
 //           50000000
 //           98950970;
 
-export async function getCep(in_cpe) {
+async function getCep(in_cpe) {
   console.log("getCep", in_cpe);
   let cep = await fetch(`https://brasilapi.com.br/api/cep/v2/${in_cpe}`, {
     cache: "force-cache",
@@ -18,7 +19,8 @@ export default async function Page(props) {
   const data = await getCep(props.params.cep);
 
   return (
-    <div>
+    <>
+      <Header active="/cep/*" />
       <main className="container py-5 my-5">
         {data.cep.errors == null ? (
           <ul className="list-group list-group-flush">
@@ -101,7 +103,7 @@ export default async function Page(props) {
           </nav>
         </footer>
       </main>
-    </div>
+    </>
   );
 }
 /*
