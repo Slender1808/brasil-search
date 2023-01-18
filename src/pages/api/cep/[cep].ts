@@ -1,5 +1,4 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import { promises as fs } from "fs";
 import fetch from "make-fetch-happen";
 
 export default async function handler(
@@ -11,6 +10,7 @@ export default async function handler(
   try {
     fetch(`https://brasilapi.com.br/api/cep/v2/${cep}`, {
       cachePath: "/tmp/br/",
+      cache: "force-cache",
     })
       .then((res) => {
         return res.json(); // download the body as JSON
@@ -18,7 +18,7 @@ export default async function handler(
       .then((body) => {
         res.status(200).json(body);
       });
-  } catch (err) {
+  } catch (err: any) {
     console.log("err", err);
     res.status(500).send(err);
   }
