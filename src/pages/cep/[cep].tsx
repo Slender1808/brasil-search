@@ -1,21 +1,29 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import { useRouter } from "next/router";
+
 import Header from "../../components/Header";
 import Layout from "../../components/Layout";
 import fetch from "../../lib/fetch";
 
 export default function Page({ cep, data }: { cep: any; data: any }) {
+  const router = useRouter();
   const [code, set_code] = useState(Number(cep));
   const [content, set_content] = useState(data);
-  const [last, set_last] = useState();
-  const [netx, set_next] = useState();
+  const [last, set_last] = useState<any>();
+  const [netx, set_next] = useState<any>();
 
   useEffect(() => {
-    set_code(Number(cep));
+    if (cep) {
+      set_code(Number(cep));
+      set_content(data);
+      console.log("cep", cep);
+    }
   }, [cep]);
 
   useEffect(() => {
     if (typeof window !== "undefined") {
+      console.log("localStorage", content);
       const client_cache = localStorage.getItem(String(code));
       console.log("client_cache", client_cache);
       if (client_cache !== null) {
@@ -35,6 +43,8 @@ export default function Page({ cep, data }: { cep: any; data: any }) {
       if (client_cache_last) {
         console.log("getItem last");
         set_last(JSON.parse(client_cache_last));
+      } else {
+        set_next(null);
       }
 
       const client_cache_next = localStorage.getItem(
@@ -44,6 +54,8 @@ export default function Page({ cep, data }: { cep: any; data: any }) {
       if (client_cache_next) {
         console.log("getItem next");
         set_next(JSON.parse(client_cache_next));
+      } else {
+        set_next(null);
       }
     }
   }, [code]);
@@ -52,12 +64,19 @@ export default function Page({ cep, data }: { cep: any; data: any }) {
     console.log("click_last");
     e.preventDefault();
     set_content(last);
-    set_code(
-      Number(
-        code > 0
-          ? String(code - 1).padStart(8, "0")
-          : String(0).padStart(8, "0")
-      )
+    const new_cep = Number(
+      code > 0 ? String(code - 1).padStart(8, "0") : String(0).padStart(8, "0")
+    );
+    set_code(new_cep);
+    router.push(
+      {
+        pathname: `/cep/[cep]`,
+        query: {
+          new_cep,
+        },
+      },
+      `/cep/${new_cep}`,
+      { shallow: true }
     );
   };
 
@@ -65,10 +84,19 @@ export default function Page({ cep, data }: { cep: any; data: any }) {
     console.log("click_next");
     e.preventDefault();
     set_content(netx);
-    set_code(
-      Number(
-        code < 99999999 ? String(code + 1).padStart(8, "0") : String(99999999)
-      )
+    const new_cep = Number(
+      code < 99999999 ? String(code + 1).padStart(8, "0") : String(99999999)
+    );
+    set_code(new_cep);
+    router.push(
+      {
+        pathname: `/cep/[cep]`,
+        query: {
+          new_cep,
+        },
+      },
+      `/cep/${new_cep}`,
+      { shallow: true }
     );
   };
 
@@ -127,7 +155,10 @@ export default function Page({ cep, data }: { cep: any; data: any }) {
               </div>
             )}
           </>
-        ) : null}
+        ) : (
+          <pre>{JSON.stringify(content)}</pre>
+        )}
+
         <footer className="my-5 py-5">
           <nav aria-label="Page navigation example">
             <ul className="pagination justify-content-center">
@@ -155,7 +186,7 @@ export default function Page({ cep, data }: { cep: any; data: any }) {
                         : String(0).padStart(8, "0")
                     }`}
                   >
-                    <span aria-hidden="true">&laquo;</span>top
+                    <span aria-hidden="true">&laquo;</span>
                   </Link>
                 )}
               </li>
@@ -183,7 +214,7 @@ export default function Page({ cep, data }: { cep: any; data: any }) {
                         : 99999999
                     }`}
                   >
-                    <span aria-hidden="true">&raquo;</span>top
+                    <span aria-hidden="true">&raquo;</span>
                   </Link>
                 )}
               </li>
@@ -197,6 +228,39 @@ export default function Page({ cep, data }: { cep: any; data: any }) {
 
 export async function getStaticProps(contex: any) {
   const { cep } = contex.params;
+  if (cep == "50000000") {
+    const result = {
+      name: "CepPromiseError",
+      message: "Todos os serviços de CEP retornaram erro.",
+      type: "service_error",
+      errors: [
+        {
+          name: "ServiceError",
+          message: "CEP NAO ENCONTRADO",
+          service: "correios",
+        },
+        {
+          name: "ServiceError",
+          message: "Erro ao se conectar com o serviço ViaCEP.",
+          service: "viacep",
+        },
+        {
+          name: "ServiceError",
+          message: "CEP não encontrado na base do WideNet.",
+          service: "widenet",
+        },
+        {
+          name: "ServiceError",
+          message: "CEP não encontrado na base dos Correios.",
+          service: "correios-alt",
+        },
+      ],
+    };
+
+    return {
+      props: { cep: Number(cep), data: result },
+    };
+  }
 
   const result = await fetch(
     `${
@@ -204,13 +268,14 @@ export async function getStaticProps(contex: any) {
     }/api/cep/${String(cep).padStart(8, "0")}`
   );
 
+  //console.log("result", result);
   return {
-    props: { cep: cep, data: result },
+    props: { cep: Number(cep), data: result },
   };
 }
 
 export async function getStaticPaths() {
-  const size = 99999999;
+  /*const size = 99999999;
 
   let paths = [
     {
@@ -225,10 +290,10 @@ export async function getStaticPaths() {
         cep: String(index).padStart(8, "0"),
       },
     });
-  }
+  }*/
 
   return {
-    paths: paths,
-    fallback: true,
+    paths: [{ params: { cep: String(50000000).padStart(8, "0") } }],
+    fallback: "blocking",
   };
 }
