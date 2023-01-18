@@ -7,9 +7,14 @@ import Header from "../../../components/Header";
 
 async function getCep(in_cpe) {
   console.log("getCep", in_cpe);
-  let cep = await fetch(`${process.env.HOST}/api/cep/${in_cpe}`, {
-    cache: "force-cache",
-  }).then((response) => response.json());
+  let cep = await fetch(
+    `${
+      process.env.HOST ? process.env.HOST : "https://brasil-search.vercel.app/"
+    }/api/cep/${in_cpe}`,
+    {
+      cache: "force-cache",
+    }
+  ).then((response) => response.json());
 
   return { cep, node: parseInt(in_cpe) };
 }
