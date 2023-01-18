@@ -1,0 +1,9 @@
+{
+  "name": "Brasil Search",
+  "short_name": "brasil-search",
+  "theme_color": "#FFFFFF",
+  "background_color": "#FFFFFF",
+  "start_url": "/",
+  "display": "standalone",
+  "orientation": "portrait"
+}

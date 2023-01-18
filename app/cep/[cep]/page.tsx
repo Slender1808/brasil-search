@@ -1,6 +1,5 @@
 import Link from "next/link";
 import Header from "../../../components/Header";
-//import fetch from "make-fetch-happen";
 
 //           99999999;
 //           50000000
@@ -8,7 +7,7 @@ import Header from "../../../components/Header";
 
 async function getCep(in_cpe) {
   console.log("getCep", in_cpe);
-  let cep = await fetch(`https://brasilapi.com.br/api/cep/v2/${in_cpe}`, {
+  let cep = await fetch(`${process.env.HOST}/api/cep/${in_cpe}`, {
     cache: "force-cache",
   }).then((response) => response.json());
 
