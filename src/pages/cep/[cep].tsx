@@ -227,51 +227,64 @@ export default function Page({ cep, data }: { cep: any; data: any }) {
 }
 
 export async function getStaticProps(contex: any) {
-  const { cep } = contex.params;
-  if (cep == "50000000") {
-    const result = {
-      name: "CepPromiseError",
-      message: "Todos os serviços de CEP retornaram erro.",
-      type: "service_error",
-      errors: [
-        {
-          name: "ServiceError",
-          message: "CEP NAO ENCONTRADO",
-          service: "correios",
-        },
-        {
-          name: "ServiceError",
-          message: "Erro ao se conectar com o serviço ViaCEP.",
-          service: "viacep",
-        },
-        {
-          name: "ServiceError",
-          message: "CEP não encontrado na base do WideNet.",
-          service: "widenet",
-        },
-        {
-          name: "ServiceError",
-          message: "CEP não encontrado na base dos Correios.",
-          service: "correios-alt",
-        },
-      ],
+  const cep = Number(contex.params.cep);
+  console.log("cep", cep);
+  if (isNaN(cep)) {
+    return {
+      redirect: {
+        permanent: true,
+        destination: "/",
+      },
     };
+  } else {
+    const s_cep = String(cep).padStart(8, "0");
+    if (s_cep == "50000000") {
+      const result = {
+        name: "CepPromiseError",
+        message: "Todos os serviços de CEP retornaram erro.",
+        type: "service_error",
+        errors: [
+          {
+            name: "ServiceError",
+            message: "CEP NAO ENCONTRADO",
+            service: "correios",
+          },
+          {
+            name: "ServiceError",
+            message: "Erro ao se conectar com o serviço ViaCEP.",
+            service: "viacep",
+          },
+          {
+            name: "ServiceError",
+            message: "CEP não encontrado na base do WideNet.",
+            service: "widenet",
+          },
+          {
+            name: "ServiceError",
+            message: "CEP não encontrado na base dos Correios.",
+            service: "correios-alt",
+          },
+        ],
+      };
 
+      return {
+        props: { cep: Number(cep), data: result },
+      };
+    }
+
+    const result = await fetch(
+      `${
+        process.env.HOST
+          ? process.env.HOST
+          : "https://brasil-search.vercel.app/"
+      }/api/cep/${s_cep}`
+    );
+
+    //console.log("result", result);
     return {
       props: { cep: Number(cep), data: result },
     };
   }
-
-  const result = await fetch(
-    `${
-      process.env.HOST ? process.env.HOST : "https://brasil-search.vercel.app/"
-    }/api/cep/${String(cep).padStart(8, "0")}`
-  );
-
-  //console.log("result", result);
-  return {
-    props: { cep: Number(cep), data: result },
-  };
 }
 
 export async function getStaticPaths() {

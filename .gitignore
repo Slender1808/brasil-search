@@ -36,4 +36,3 @@ yarn-error.log*
 public/ceps/*
 public/sw.js
 public/workbox*
-public/sitemap*
