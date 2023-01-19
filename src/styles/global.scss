@@ -7,26 +7,12 @@
 
 // Then add additional custom code here
 
-body.light-mode {
-  background-color: #fff;
-  color: #333;
-  transition: background-color 0.3s ease;
-}
+$color-mode-type: data;
 
-body.dark-mode {
-  background-color: #10171d;
-  color: #dfdfdf;
-
-  .dark-mode-toggle > button {
-    color: #999;
-    &:last-child {
-      color: rgb(54, 124, 14);
-    }
-  }
-
+@include color-mode(dark) {
   .gsc-control-cse {
-    background-color: #10171d;
-    border: 1px solid #10171d;
+    background-color: #212529;
+    border: 1px solid #212529;
     box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.175);
   }
 
@@ -35,18 +21,18 @@ body.dark-mode {
   }
 
   .gsc-input-box {
-    background-color: #10171d;
-    border: 1px solid #10171d;
+    background-color: #212529;
+    border: 1px solid #212529;
   }
 
   .gsc-input {
-    background-color: #10171d !important;
+    background-color: #212529 !important;
     color: #dfdfdf;
   }
 
   .gsc-completion-container {
-    background-color: #10171d !important;
+    background-color: #212529 !important;
     color: #dfdfdf;
-    border: 1px solid #10171d;
+    border: 1px solid #212529;
   }
 }
