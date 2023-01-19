@@ -7,3 +7,5 @@ Host: https://brasil-search.vercel.app/
 
 # Sitemaps
 Sitemap: https://brasil-search.vercel.app/sitemap.xml
+Sitemap: https://brasil-search.vercel.app/cep/sitemap-0.xml
+Sitemap: https://brasil-search.vercel.app/cep/sitemap-1.xml

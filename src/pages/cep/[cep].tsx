@@ -4,6 +4,7 @@ import { useRouter } from "next/router";
 
 import Header from "../../components/Header";
 import Layout from "../../components/Layout";
+import Share from "../../components/Share";
 import fetch from "../../lib/fetch";
 
 export default function Page({ cep, data }: { cep: any; data: any }) {
@@ -107,47 +108,52 @@ export default function Page({ cep, data }: { cep: any; data: any }) {
         {content ? (
           <>
             {content.errors == null ? (
-              <ul className="list-group list-group-flush">
-                <li className="list-group-item">
-                  <div className="ms-2 me-auto">
-                    <div className="fw-bold">Cep</div>
-                    {content.cep}
-                  </div>
-                </li>
-                <li className="list-group-item">
-                  <div className="ms-2 me-auto">
-                    <div className="fw-bold">Estado</div>
-                    {content.state}
-                  </div>
-                </li>
-                <li className="list-group-item">
-                  <div className="ms-2 me-auto">
-                    <div className="fw-bold">Cidade</div>
-                    {content.city}
-                  </div>
-                </li>
-                <li className="list-group-item">
-                  <div className="ms-2 me-auto">
-                    <div className="fw-bold">Bairro</div>
-                    {content.neighborhood}
-                  </div>
-                </li>
-                <li className="list-group-item">
-                  <div className="ms-2 me-auto">
-                    <div className="fw-bold">Rua</div>
-                    {content.street}
-                  </div>
-                </li>
-                {content.location.coordinates.longitude ? (
+              <div className="col col-lg-6 mx-auto">
+                <ul className="list-group list-group-flush">
                   <li className="list-group-item">
                     <div className="ms-2 me-auto">
-                      <div className="fw-bold">coordinates</div>
-                      {content.location.coordinates.longitude}{" "}
-                      {content.location.coordinates.latitude}
+                      <div className="fw-bold">Cep</div>
+                      {content.cep}
                     </div>
                   </li>
-                ) : null}
-              </ul>
+                  <li className="list-group-item">
+                    <div className="ms-2 me-auto">
+                      <div className="fw-bold">Estado</div>
+                      {content.state}
+                    </div>
+                  </li>
+                  <li className="list-group-item">
+                    <div className="ms-2 me-auto">
+                      <div className="fw-bold">Cidade</div>
+                      {content.city}
+                    </div>
+                  </li>
+                  <li className="list-group-item">
+                    <div className="ms-2 me-auto">
+                      <div className="fw-bold">Bairro</div>
+                      {content.neighborhood}
+                    </div>
+                  </li>
+                  <li className="list-group-item">
+                    <div className="ms-2 me-auto">
+                      <div className="fw-bold">Rua</div>
+                      {content.street}
+                    </div>
+                  </li>
+                  {content.location.coordinates.longitude ? (
+                    <li className="list-group-item">
+                      <div className="ms-2 me-auto">
+                        <div className="fw-bold">coordinates</div>
+                        {content.location.coordinates.longitude}{" "}
+                        {content.location.coordinates.latitude}
+                      </div>
+                    </li>
+                  ) : null}
+                </ul>
+                <div className="my-5 text-center ">
+                  <Share text={`cep: ${code}`} />
+                </div>
+              </div>
             ) : (
               <div className="text-center">
                 <h1>Cep {code} não existe</h1>
@@ -158,7 +164,6 @@ export default function Page({ cep, data }: { cep: any; data: any }) {
         ) : (
           <pre>{JSON.stringify(content)}</pre>
         )}
-
         <footer className="my-5 py-5">
           <nav aria-label="Page navigation example">
             <ul className="pagination justify-content-center">
