@@ -1,0 +1,52 @@
+// Custom.scss
+// Option A: Include all of Bootstrap
+
+// Include any default variable overrides here (though functions won't be available)
+//@import "../../node_modules/bootstrap/scss/_variables-dark";
+@import "../../node_modules/bootstrap/scss/bootstrap";
+
+// Then add additional custom code here
+
+body.light-mode {
+  background-color: #fff;
+  color: #333;
+  transition: background-color 0.3s ease;
+}
+
+body.dark-mode {
+  background-color: #10171d;
+  color: #dfdfdf;
+
+  .dark-mode-toggle > button {
+    color: #999;
+    &:last-child {
+      color: rgb(54, 124, 14);
+    }
+  }
+
+  .gsc-control-cse {
+    background-color: #10171d;
+    border: 1px solid #10171d;
+    box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.175);
+  }
+
+  .gsc-search-button-v2 {
+    box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.175);
+  }
+
+  .gsc-input-box {
+    background-color: #10171d;
+    border: 1px solid #10171d;
+  }
+
+  .gsc-input {
+    background-color: #10171d !important;
+    color: #dfdfdf;
+  }
+
+  .gsc-completion-container {
+    background-color: #10171d !important;
+    color: #dfdfdf;
+    border: 1px solid #10171d;
+  }
+}

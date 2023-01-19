@@ -3,6 +3,7 @@ import Layout from "../components/Layout";
 import Gcse from "../components/Gcse";
 
 export default function Home() {
+
   return (
     <Layout>
       <Header active="/" />

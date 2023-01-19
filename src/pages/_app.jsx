@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import Head from "next/head";
-
-import "bootstrap/dist/css/bootstrap.min.css";
+import "../styles/global.scss";
 
 export default function App({ Component, pageProps }) {
   const [isOnline, setIsOnline] = useState(true);
@@ -115,6 +114,7 @@ export default function App({ Component, pageProps }) {
           href="/favicon-16x16.png"
         />
       </Head>
+
       <Component {...pageProps} />
     </>
   );

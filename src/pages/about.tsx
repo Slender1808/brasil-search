@@ -2,14 +2,13 @@ import Header from "../components/Header";
 import Layout from "../components/Layout";
 import Iframely from "@/components/Iframely";
 import Image from "next/image";
-import logo from '../../images/logo.png'
-
+import logo from '../images/logo.png'
 
 export default function Home() {
   return (
     <Layout>
       <Header active="/about" />
-      <main className="pt-5 mt-3 container">
+      <main className="py-5 my-5 container">
         <Image
           className="d-block mx-auto"
           alt="logo do brasil search"
