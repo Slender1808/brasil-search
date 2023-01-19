@@ -2,6 +2,8 @@ import Header from "../components/Header";
 import Layout from "../components/Layout";
 import Iframely from "@/components/Iframely";
 import Image from "next/image";
+import logo from '../../images/logo.png'
+
 
 export default function Home() {
   return (
@@ -11,7 +13,7 @@ export default function Home() {
         <Image
           className="d-block mx-auto"
           alt="logo do brasil search"
-          src="/icon-192x192.png"
+          src={logo}
           width={192}
           height={192}
         />
