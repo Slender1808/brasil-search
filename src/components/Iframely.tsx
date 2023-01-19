@@ -5,7 +5,8 @@ export default function Iframely() {
   useEffect(() => {
     const script = document.createElement("script");
     document.head.append(script);
-    script.src = "https:////iframely.net/embed.js";
+    script.async = true;
+    script.src = "https://iframely.net/embed.js";
   }, []);
   return (
     <div className="iframely-embed">
