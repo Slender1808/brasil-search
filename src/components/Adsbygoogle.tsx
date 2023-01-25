@@ -8,7 +8,7 @@ export default function Adsbygoogle() {
     document.head.append(script);
     script.async = true;
     script.src =
-      "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3304167426675646";
+      "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7540935582112706";
   }, []);
   return <></>;
 }
