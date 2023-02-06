@@ -12,10 +12,10 @@
   },
   "dependencies": {
     "@next/font": "13.1.5",
-    "@types/node": "18.11.18",
+    "@types/make-fetch-happen": "^10.0.1",
+    "@types/node": "^18.11.18",
     "@types/react": "18.0.27",
     "@types/react-dom": "18.0.10",
-    "@types/make-fetch-happen": "^10.0.1",
     "bootstrap": "next-5",
     "eslint": "8.32.0",
     "eslint-config-next": "13.1.5",
@@ -23,10 +23,12 @@
     "next": "13.1.5",
     "next-pwa": "^5.6.0",
     "next-sitemap": "^3.1.47",
+    "prisma": "^4.9.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-web-share": "^2.0.2",
     "sass": "^1.57.1",
-    "typescript": "4.9.4"
+    "ts-node": "^10.9.1",
+    "typescript": "^4.9.4"
   }
 }
