@@ -18,7 +18,7 @@
     "@types/react-dom": "18.0.10",
     "bootstrap": "next-5",
     "eslint": "8.32.0",
-    "eslint-config-next": "13.1.5",
+    "eslint-config-next": "13.4.4",
     "make-fetch-happen": "^11.0.2",
     "next": "13.1.5",
     "next-pwa": "^5.6.0",
