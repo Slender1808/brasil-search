@@ -13,7 +13,7 @@
   "dependencies": {
     "@next/font": "13.1.5",
     "@types/make-fetch-happen": "^10.0.1",
-    "@types/node": "^18.11.18",
+    "@types/node": "^18.16.16",
     "@types/react": "18.0.27",
     "@types/react-dom": "18.0.10",
     "bootstrap": "next-5",
