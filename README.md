@@ -1,4 +1,4 @@
-# Projeto de Pesquisa de Códigos Postais
+# Pesquisa de CEPs
 
 Este projeto é destinado a pesquisa de códigos postais no Brasil utilizando o Google Custom Search e a API de códigos postais do brasilapi.com.br. Este é um projeto baseado no Next.js, inicializado com o `create-next-app`.
 
