@@ -2,7 +2,7 @@
 module.exports = {
   siteUrl: "https://brasil-search.vercel.app/",
   generateRobotsTxt: true,
-  changefreq: "yearly",
+  changefreq: "monthly",
   robotsTxtOptions: {
     additionalSitemaps: [
       "https://brasil-search.vercel.app/cep/sitemap-0.xml",
