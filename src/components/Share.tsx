@@ -9,7 +9,7 @@ export default function Share({ text }: any) {
       data={{
         text: text,
         url: `https://brasil-search.vercel.app${router.asPath}`,
-        title: "Brasoç Search",
+        title: "Brasil Search",
       }}
       onClick={() => console.info("share successful!")}
     >
