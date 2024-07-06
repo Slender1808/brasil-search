@@ -19,7 +19,7 @@ module.exports = withPWA({
           { key: "Access-Control-Allow-Headers", value: "*" },
           {
             key: "Cache-Control",
-            value: "max-age=31536000, s-maxage=31536000",
+            value: "max-age=2592000, s-maxage=2592000",
           },
         ],
       },
