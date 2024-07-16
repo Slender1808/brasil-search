@@ -15,7 +15,7 @@
     "@types/make-fetch-happen": "^10.0.1",
     "@types/node": "^20.4.6",
     "@types/react": "18.3.3",
-    "@types/react-dom": "18.2.7",
+    "@types/react-dom": "18.3.0",
     "bootstrap": "next-5",
     "eslint": "9.5.0",
     "eslint-config-next": "14.2.4",
